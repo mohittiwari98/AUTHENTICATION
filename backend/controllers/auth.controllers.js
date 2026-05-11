@@ -1,3 +1,4 @@
+import generateToken from "../config/token.js";
 import bcrypt from "bcryptjs";
 export const signup = async (req, res) => {
   try {
@@ -17,6 +18,7 @@ export const signup = async (req, res) => {
       password: hashedpassword,
       userName
     });
+    let token=generateToken(user._id);
     return res.status(201).json({ message: "User created", user });
   } catch (e) {
     return res.status(400).json({ message: "Error in signup" });
